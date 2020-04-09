@@ -1,0 +1,90 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="quizassets.js"></script>
+</head>
+<body>
+<div id= "start">
+    <form id = "quiz_selection_form">
+        <label id = "nameplate"> What is your name?</label>
+        <input type="text" id="name" name="name"><br>
+        <select id="quizField" name="quizField">
+            <option value = "quiz1">quiz 1</option>
+            <option value="quiz2">quiz 2</option>
+        </select></br><br>
+        <input type="button"  onclick="getinformation()" value="submit">
+    </form>
+</div>
+<div id="quiz_view">
+
+</div>
+
+<div id = "feedback_view">
+
+</div>
+<div id = "quiz_complete">
+
+</div>
+
+<div id ="scoreboard_view">
+
+</div>
+
+</body>
+
+<!-- <html>
+
+<body>
+    <div class ="container h-100">
+        <div class = "row align-items-center h-100">
+            <div class="col-6 mx-auto">
+                <div id="app_widget" class="align-items-center">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+  
+
+
+
+
+
+    <script id="FirstName" type="text/x-handlebars-template">
+    <div id = "first_form">
+        <form id="name">
+            <H1>What is your name?{{first_name}}</H1>
+            <input type="text" id="fname"><br>
+            <input type="button" onclick="submitName()" value="Submit">
+        </form>
+    </div> </script>
+    <script id="names" type="text/x-handlebars-template">
+    <h1> doesthis show up
+        {{this.first_name}}
+    </h1></script>
+    <script id="post_view2" type="text/x-handlebars-template">
+    <div class="container">
+        <div class="row">
+            <div class= "col">
+                <div class="card" style="width:200px">
+                <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png">
+                <div class = "card-body">
+                    <h4 class="card title">{{this.first_name}}</h4>
+                    <p class="card-text">some example text</p>
+                    <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            
+            </div>
+            </div>
+        </div>
+    </div>
+
+    </script>
+</body>
+</html> -->
