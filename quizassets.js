@@ -6,7 +6,8 @@ const appState={
     quizno: '',
     selectedAnswer:'',
     correctAnswerForCurrentQuestion:'',
-    feedback:''
+    feedback:'',
+    quizLength:0
     
 }
 document.addEventListener('DOMContentLoaded', () =>{
@@ -18,6 +19,8 @@ let getQuiz= async(url) =>{
         const response= await fetch("https://my-json-server.typicode.com/mmmnice/indiv_project_db/" +appState.quizno)
         const result = await response.json();
         console.log(result);
+        appState.quizLength=result.length;
+        console.log(appState.quizLength);
         generateQuiz(result);
 }
 
@@ -96,7 +99,7 @@ function generateQuiz(data){
         console.log(appState.selectedAnswer)
         check(appState.correctAnswerForCurrentQuestion, appState.selectedAnswer)
         //feedback(response,data[i].reason)
-        document.querySelector("#quiz_view").style.display = 'none';
+       // document.querySelector("#quiz_view").style.display = 'none';
         //document.querySelector("#feedback_view").innerHTML= feedback_text;
         return false;
     }
@@ -104,6 +107,8 @@ function generateQuiz(data){
 
 function check(rightAnswer,userAnswer)
 {
+    document.querySelector("#quiz_view").style.display='none';
+    document.querySelector("#feedback_view").style.display='none';
     console.log(rightAnswer);
     console.log(userAnswer);
     if(rightAnswer== userAnswer){
@@ -115,13 +120,78 @@ function check(rightAnswer,userAnswer)
         appState.incorrect=appState.incorrect+1;
         appState.counter=appState.counter+1;
         badFeedback()
-        //write about the feedback here
+        
     }
 }
-//MAKE SURE YOU DO THE SECOND OF POSITIVE REINFORCEMENT.  YOU ALSO MUST STILL DO THE FEEDBACK VIEW FOR GETTING SOMETHING WRONG.
 function goodFeedback()
 {
-    getQuiz();
+    document.querySelector("#quiz_view").style.display='none';
+    document.querySelector("#feedback_view").style.display='block';
+    document.querySelector("#feedback_view").innerHTML=`<h1>Nice</h1>`
+    $('#feedback_view').delay(1000).fadeOut(300);
+    if (appState.counter<appState.quizLength){ 
+
+        getQuiz(); 
+   
+    }
+
+    else {
+
+        console.log("finished")
+        console.log(appState)
+        
+        endingscreen()
+    }
+    //getQuiz();
+}
+function badFeedback()
+{
+    document.querySelector("#quiz_view").style.display='none';
+    document.querySelector("#feedback_view").style.display='block';
+    if(appState.counter<appState.quizLength){
+        
+    document.querySelector("#feedback_view").innerHTML=`<h1>Incorrect</h1>
+     <p> ${appState.feedback} </p>
+     <input type ="button" onclick=getQuiz() value = "Got It"> `
+    }
+    else{
+        document.querySelector("#feedback_view").innerHTML=`<h1>Incorrect</h1>
+        <p> ${appState.feedback} </p>
+        <input type="button" onclick=endingscreen() value = "Got It">`
+    }
+}
+//write logic for finding length with of the brought in quiz with the async function
+function endingscreen()
+{
+    console.log("does it even get here what is going on")
+    document.querySelector("#quiz_view").style.display='none';
+    document.querySelector("#feedback_view").style.display='none';
+    document.querySelector("#quiz_complete").style.display='block';
+    document.querySelector("#quiz_complete").innerHTML= 
+    `<h1> ${appState.name}, you have completed the test </h1>
+    <h4> Your Score: </h4>
+    <ul>Correct: ${appState.correct}
+    <ul>Incorrect: ${appState.incorrect}
+    <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Take the Other Quiz">
+    `
+}
+// take off displays
+function retake()
+{
+    appState.counter=0;
+    appState.correct=0;
+    appState.incorrect=0;
+    document.querySelector("#quiz_complete").style.display='none'
+    getQuiz()
+}
+function other()
+{
+    appState.quizno="quiz2";
+    appState.counter=0;
+    appState.correct=0;
+    appState.incorrect=0;
+    document.querySelector("#quiz_complete").style.display='none'
+    getQuiz()
 }
 
 
