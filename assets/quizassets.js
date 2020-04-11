@@ -106,10 +106,10 @@ function generateQuestion(data){
     else if(data.type == "true false")
     {
         quiz_question=
-        `<h3> ${data.question} </h3>
+        `<h3> ${data.question} </h3><br>
         <form id= "quiz_answer_form">
         <input type = "radio" value = "true" name = "answer"> True</input><br>
-        <input type = "radio" value = "false" name ="answer"> False </input>
+        <input type = "radio" value = "false" name ="answer"> False </input><br>
         <input type = "submit" value= "submit">
         </form>
         <br>
@@ -261,9 +261,9 @@ function endingscreen()
     document.querySelector("#quiz_complete").innerHTML= 
     `<h1> ${appState.name}, you have passed the test </h1><br>
     <h4> Your Score: ${percentage}%</h4><br>
-    <ul>Correct: ${appState.correct}
-    <ul>Incorrect: ${appState.incorrect}
-    <ul> Total Seconds to complete: ${appState.completedTime}<br>
+    <h6>Correct: ${appState.correct}</h6><br>
+    <h6>Incorrect: ${appState.incorrect}</h6><br>
+    <h6>Total Seconds to complete: ${appState.completedTime}</h6><br>
     <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Take the Other Quiz">
     `
     }
@@ -272,9 +272,9 @@ function endingscreen()
     document.querySelector("#quiz_complete").innerHTML= 
     `<h1> ${appState.name}, you have failed the test </h1><br>
     <h4> Your Score: ${percentage}%</h4><br>
-    <ul>Correct: ${appState.correct}
-    <ul>Incorrect: ${appState.incorrect}
-    <ul> Total Seconds to complete: ${appState.completedTime}<br>
+    <h6>Correct: ${appState.correct}</h6><br>
+    <h6>Incorrect: ${appState.incorrect}</h6><br>
+    <h6> Total Seconds to complete: ${appState.completedTime}</h6><br>
     <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Take the Other Quiz">
     `
     }
