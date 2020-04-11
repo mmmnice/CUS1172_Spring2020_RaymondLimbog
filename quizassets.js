@@ -7,7 +7,8 @@ const appState={
     selectedAnswer:'',
     correctAnswerForCurrentQuestion:'',
     feedback:'',
-    quizLength:0
+    quizLength:0,
+    timePassed:0
     
 }
 document.addEventListener('DOMContentLoaded', () =>{
@@ -22,6 +23,10 @@ let getQuiz= async(url) =>{
         appState.quizLength=result.length;
         console.log(appState.quizLength);
         generateQuiz(result);
+        if(appState.counter==0)
+        {
+        timer()
+        }
 }
 
 function getinformation(){
@@ -51,9 +56,13 @@ function generateQuestion(data){
             <label for = "answer2"> ${data.choices[1]} </label><br>
             <input type="radio" value = "${data.choices[2]}" name = "answer"></input>
             <label for = "answer3"> ${data.choices[2]} </label><br>
+            <input type="radio" value = "${data.choices[3]}" name = "answer"></input>
+            <label for = "answer4"> ${data.choices[3]} </label><br>
             <input type = "submit" value = "submit"></input>
            
-        </form>`
+        </form>
+        <br>
+        Time: ${appState.timePassed}`
         
     }
     
@@ -61,10 +70,12 @@ function generateQuestion(data){
     {
         quiz_question =
         `<h3> ${data.question}</h3>
-        <form id= quiz_answer_form>
+        <form id= "quiz_answer_form">
         <input type= "text" name ="answer">
         <input type="submit" value="submit">
-        </form>`
+        </form>
+        <br>
+        Time: ${appState.timePassed}`
 
     }
     else if(data.type == "true false")
@@ -75,7 +86,35 @@ function generateQuestion(data){
         <input type = "radio" value = "true" name = "answer"> True</input><br>
         <input type = "radio" value = "false" name ="answer"> False </input>
         <input type = "submit" value= "submit">
-        </form>`
+        </form>
+        <br>
+        Time: ${appState.timePassed}`
+    }
+    else if(data.type == "fill in the blank")
+    {
+        quiz_question=
+        `<h3> ${data.question} </h3>
+        <form id = "quiz_answer_form">
+        <input type= "text" name = "answer">
+        <input type="submit" value="submit">
+        </form>
+        <br>
+        Time: ${appState.timePassed}`
+    }
+    else if(data.type == "image")
+    {
+        quiz_question = 
+        `<h3> ${data.question} </h3>
+        <form id = "quiz_answer_form">
+        <input type="radio" value="${data.choices[0]}" name = "answer"></input>
+        <img src="${data.choices[0]}"><br>
+        <input type="radio" value="${data.choices[1]}" name = "answer"></input>
+        <img src="${data.choices[1]}"><br>
+        <input type="radio" value="${data.choices[2]}" name = "answer"></input>
+        <img src="${data.choices[2]}"><br>
+        <input type= "submit" value = "submit">
+        </form>
+        `
     }
         //document.getElementById().innerHTML= ""
     
@@ -84,6 +123,7 @@ function generateQuestion(data){
 }
 
 function generateQuiz(data){
+    console.log(appState.timePassed)
     quiz_question=generateQuestion(data[appState.counter]);
     appState.correctAnswerForCurrentQuestion=data[appState.counter].answer;
     appState.feedback=data[appState.counter].reason;
@@ -125,23 +165,51 @@ function check(rightAnswer,userAnswer)
 }
 function goodFeedback()
 {
+    let a= getRandomInt(3);
+    console.log(a);
     document.querySelector("#quiz_view").style.display='none';
     document.querySelector("#feedback_view").style.display='block';
-    document.querySelector("#feedback_view").innerHTML=`<h1>Nice</h1>`
-    $('#feedback_view').delay(1000).fadeOut(300);
-    if (appState.counter<appState.quizLength){ 
+    if(a==0)
+    {
+        document.querySelector("#feedback_view").innerHTML=`<h1>Nice!</h1>`
+        $('#feedback_view').delay(1000).fadeOut(300);
+    }
+    else if(a==1)
+    {
+        document.querySelector("#feedback_view").innerHTML=`<h1>Cool!</h1>`
+        $('#feedback_view').delay(1000).fadeOut(300);
+    }
+    else if(a==2)
+    {
+        document.querySelector("#feedback_view").innerHTML=`<h1>Brilliant!</h1>`
+        $('#feedback_view').delay(1000).fadeOut(300);
+    }
+    // document.querySelector("#feedback_view").innerHTML=`<h1>Nice</h1>`
+    // $('#feedback_view').delay(1000).fadeOut(300);
 
-        getQuiz(); 
+    setTimeout(function() {
+        if (appState.counter<appState.quizLength){
+            getQuiz();
+        }
+        else {
+            console.log("finished")
+            console.log(appState)
+            endingscreen()
+        }
+    },1500)
+    // if (appState.counter<appState.quizLength){ 
+
+    //     getQuiz(); 
    
-    }
+    // }
 
-    else {
+    // else {
 
-        console.log("finished")
-        console.log(appState)
+    //     console.log("finished")
+    //     console.log(appState)
         
-        endingscreen()
-    }
+    //     endingscreen()
+    // }
     //getQuiz();
 }
 function badFeedback()
@@ -167,13 +235,28 @@ function endingscreen()
     document.querySelector("#quiz_view").style.display='none';
     document.querySelector("#feedback_view").style.display='none';
     document.querySelector("#quiz_complete").style.display='block';
+    let grade=(appState.correct/appState.quizLength)
+    let percentage = grade*100
+    if(percentage >=80)
+    {
     document.querySelector("#quiz_complete").innerHTML= 
-    `<h1> ${appState.name}, you have completed the test </h1>
-    <h4> Your Score: </h4>
+    `<h1> ${appState.name}, you have passed the test </h1><br>
+    <h4> Your Score: ${percentage}%</h4><br>
     <ul>Correct: ${appState.correct}
-    <ul>Incorrect: ${appState.incorrect}
+    <ul>Incorrect: ${appState.incorrect}<br>
     <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Take the Other Quiz">
     `
+    }
+    else
+    {
+    document.querySelector("#quiz_complete").innerHTML= 
+    `<h1> ${appState.name}, you have failed the test </h1><br>
+    <h4> Your Score: ${percentage}%</h4><br>
+    <ul>Correct: ${appState.correct}
+    <ul>Incorrect: ${appState.incorrect}<br>
+    <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Take the Other Quiz">
+    `
+    }
 }
 // take off displays
 function retake()
@@ -186,7 +269,15 @@ function retake()
 }
 function other()
 {
-    appState.quizno="quiz2";
+    if(appState.quizno=="quiz2")
+    {
+        appState.quizno="quiz1";
+    }
+    else
+    {
+        appState.quizno="quiz2";
+    }
+    //appState.quizno="quiz2";
     appState.counter=0;
     appState.correct=0;
     appState.incorrect=0;
@@ -194,4 +285,17 @@ function other()
     getQuiz()
 }
 
+ function timer()
+ {
+     setInterval(tick,1000)
+ }
+ function tick()
+ {
+     appState.timePassed++;
+ }
+ function getRandomInt(max){
+
+     return Math.floor(Math.random()*Math.floor(max));
+
+ }
 
