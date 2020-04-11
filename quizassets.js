@@ -8,25 +8,49 @@ const appState={
     correctAnswerForCurrentQuestion:'',
     feedback:'',
     quizLength:0,
-    timePassed:0
+    timePassed:0,
+    currentScore:0,
+    clock:"",
+    completedTime:""
     
 }
+let time;
 document.addEventListener('DOMContentLoaded', () =>{
     
 
 })
 let getQuiz= async(url) =>{
     
-        const response= await fetch("https://my-json-server.typicode.com/mmmnice/indiv_project_db/" +appState.quizno)
-        const result = await response.json();
-        console.log(result);
-        appState.quizLength=result.length;
-        console.log(appState.quizLength);
-        generateQuiz(result);
-        if(appState.counter==0)
+        if(appState.quizno=="quiz1")
         {
-        timer()
+            const response= await fetch("https://my-json-server.typicode.com/mmmnice/indiv_project_db/" +appState.quizno)
+            const result = await response.json();
+            console.log(result);
+            appState.currentScore=(appState.correct/appState.quizLength)*100;
+            appState.quizLength=result.length;
+            console.log(appState.quizLength);
+            generateQuiz(result);
+            // if(appState.counter==0)
+            // {
+            //     setInterval(setTime, 1000);
+            // }
         }
+        else if(appState.quizno == "quiz2")
+        {
+            const response= await fetch("https://my-json-server.typicode.com/mmmnice/indiv_project_db2/" +appState.quizno)
+            const result = await response.json();
+            console.log(result);
+            appState.currentScore=(appState.correct/appState.quizLength)*100;
+            appState.quizLength=result.length;
+            console.log(appState.quizLength);
+            generateQuiz(result);
+            // if(appState.counter==0)
+            // {
+            //     setInterval(setTime, 1000);
+            // }
+        }
+        //const response= await fetch("https://my-json-server.typicode.com/mmmnice/indiv_project_db/" +appState.quizno)
+        
 }
 
 function getinformation(){
@@ -43,6 +67,7 @@ function getinformation(){
 }
 function generateQuestion(data){
     console.log(data.answer)
+    let what = appState.currentScore.toFixed(2);
     //console.log(appState.correctAnswerForCurrentQuestion)
     console.log(data)
     if(data.type=="multiple choice")
@@ -62,7 +87,7 @@ function generateQuestion(data){
            
         </form>
         <br>
-        Time: ${appState.timePassed}`
+        Score:${what}%`
         
     }
     
@@ -75,7 +100,7 @@ function generateQuestion(data){
         <input type="submit" value="submit">
         </form>
         <br>
-        Time: ${appState.timePassed}`
+        Score:${what}%`
 
     }
     else if(data.type == "true false")
@@ -88,7 +113,7 @@ function generateQuestion(data){
         <input type = "submit" value= "submit">
         </form>
         <br>
-        Time: ${appState.timePassed}`
+        Score:${what}%`
     }
     else if(data.type == "fill in the blank")
     {
@@ -99,7 +124,7 @@ function generateQuestion(data){
         <input type="submit" value="submit">
         </form>
         <br>
-        Time: ${appState.timePassed}`
+        Score:${what}%`
     }
     else if(data.type == "image")
     {
@@ -114,6 +139,7 @@ function generateQuestion(data){
         <img src="${data.choices[2]}"><br>
         <input type= "submit" value = "submit">
         </form>
+        Score:${what}%
         `
     }
         //document.getElementById().innerHTML= ""
@@ -133,6 +159,11 @@ function generateQuiz(data){
     document.querySelector("#feedback_view").style.display= 'none';
     document.querySelector("#quiz_view").innerHTML= generateQuestion(data[appState.counter]);
     document.querySelector("#quiz_view").style.display= 'block';
+    if(appState.counter==0)
+    {    
+        document.querySelector("#timer").style.display='block';
+        timer();
+    }
     
     document.querySelector("#quiz_view").onsubmit =  () =>{
         appState.selectedAnswer=document.forms["quiz_answer_form"]["answer"].value;
@@ -197,20 +228,6 @@ function goodFeedback()
             endingscreen()
         }
     },1500)
-    // if (appState.counter<appState.quizLength){ 
-
-    //     getQuiz(); 
-   
-    // }
-
-    // else {
-
-    //     console.log("finished")
-    //     console.log(appState)
-        
-    //     endingscreen()
-    // }
-    //getQuiz();
 }
 function badFeedback()
 {
@@ -231,19 +248,22 @@ function badFeedback()
 //write logic for finding length with of the brought in quiz with the async function
 function endingscreen()
 {
+    document.querySelector("#timer").style.display='none';
     console.log("does it even get here what is going on")
     document.querySelector("#quiz_view").style.display='none';
     document.querySelector("#feedback_view").style.display='none';
     document.querySelector("#quiz_complete").style.display='block';
     let grade=(appState.correct/appState.quizLength)
     let percentage = grade*100
-    if(percentage >=80)
+    let cleanPercentage=percentage.toFixed(2)
+    if(cleanPercentage >=80)
     {
     document.querySelector("#quiz_complete").innerHTML= 
     `<h1> ${appState.name}, you have passed the test </h1><br>
     <h4> Your Score: ${percentage}%</h4><br>
     <ul>Correct: ${appState.correct}
-    <ul>Incorrect: ${appState.incorrect}<br>
+    <ul>Incorrect: ${appState.incorrect}
+    <ul> Total Seconds to complete: ${appState.completedTime}<br>
     <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Take the Other Quiz">
     `
     }
@@ -253,7 +273,8 @@ function endingscreen()
     `<h1> ${appState.name}, you have failed the test </h1><br>
     <h4> Your Score: ${percentage}%</h4><br>
     <ul>Correct: ${appState.correct}
-    <ul>Incorrect: ${appState.incorrect}<br>
+    <ul>Incorrect: ${appState.incorrect}
+    <ul> Total Seconds to complete: ${appState.completedTime}<br>
     <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Take the Other Quiz">
     `
     }
@@ -264,6 +285,7 @@ function retake()
     appState.counter=0;
     appState.correct=0;
     appState.incorrect=0;
+    appState.currentScore=0;
     document.querySelector("#quiz_complete").style.display='none'
     getQuiz()
 }
@@ -281,18 +303,43 @@ function other()
     appState.counter=0;
     appState.correct=0;
     appState.incorrect=0;
+    appState.currentScore=0;
     document.querySelector("#quiz_complete").style.display='none'
     getQuiz()
 }
 
- function timer()
- {
-     setInterval(tick,1000)
- }
- function tick()
- {
-     appState.timePassed++;
- }
+
+//setInterval(setTime, 1000);
+
+// function setTime() {
+//     var minutesLabel = document.getElementById("minutes");
+//     var secondsLabel = document.getElementById("seconds");
+//   ++appState.timePassed;
+//   secondsLabel.innerHTML = pad(appState.timePassed % 60);
+//   minutesLabel.innerHTML = pad(parseInt(appState.timePassed / 60));
+
+//   appState.completedTime=minutesLabel+ ":"+ secondsLabel; 
+// }
+function timer(){
+    clearInterval(time);
+    let seconds = 0;
+
+    time = setInterval(() => {
+        seconds++;
+        appState.completedTime=seconds;
+        minutes = Math.floor(seconds/60);
+        document.querySelector("#timer").textContent=`Timer: ${minutes}:${seconds%60}`
+    }, 1000)
+
+}
+// function pad(val) {
+//   var valString = val + "";
+//   if (valString.length < 2) {
+//     return "0" + valString;
+//   } else {
+//     return valString;
+//   }
+// }
  function getRandomInt(max){
 
      return Math.floor(Math.random()*Math.floor(max));
