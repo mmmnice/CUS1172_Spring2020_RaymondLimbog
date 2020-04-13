@@ -259,7 +259,7 @@ function endingscreen()
     if(cleanPercentage >=80)
     {
     document.querySelector("#quiz_complete").innerHTML= 
-    `<h1> Congratualtions ${appState.name}! You have passed the test </h1><br>
+    `<h1> Congratulations ${appState.name}! You have passed the test </h1><br>
     <h4> Your Score: ${percentage}%</h4><br>
     <h6>Correct: ${appState.correct}</h6><br>
     <h6>Incorrect: ${appState.incorrect}</h6><br>

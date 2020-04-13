@@ -6,7 +6,16 @@ div{
     text-align:center;
     margin-left:auto;
     margin-right:auto;
+    
+}
+#row{
+    text-align:center;
 }
 body{
     background-color:coral;
+}
+#start{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto
 }
