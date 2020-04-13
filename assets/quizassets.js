@@ -264,7 +264,7 @@ function endingscreen()
     <h6>Correct: ${appState.correct}</h6><br>
     <h6>Incorrect: ${appState.incorrect}</h6><br>
     <h6>Total Seconds to complete: ${appState.completedTime}</h6><br>
-    <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Take the Other Quiz">
+    <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Main Menu">
     `
     }
     else
@@ -275,7 +275,7 @@ function endingscreen()
     <h6>Correct: ${appState.correct}</h6><br>
     <h6>Incorrect: ${appState.incorrect}</h6><br>
     <h6> Total Seconds to complete: ${appState.completedTime}</h6><br>
-    <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Take the Other Quiz">
+    <input type = "button" onclick= retake() value= "Retake Quiz"> <input type= "button" onclick=other() value= "Main Menu">
     `
     }
 }
@@ -291,21 +291,14 @@ function retake()
 }
 function other()
 {
-    if(appState.quizno=="quiz2")
-    {
-        appState.quizno="quiz1";
-    }
-    else
-    {
-        appState.quizno="quiz2";
-    }
     //appState.quizno="quiz2";
     appState.counter=0;
     appState.correct=0;
     appState.incorrect=0;
     appState.currentScore=0;
-    document.querySelector("#quiz_complete").style.display='none'
-    getQuiz()
+    document.querySelector("#quiz_complete").style.display='none';
+    document.querySelector("#start").style.display='block'
+    
 }
 
 function timer(){
