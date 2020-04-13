@@ -259,7 +259,7 @@ function endingscreen()
     if(cleanPercentage >=80)
     {
     document.querySelector("#quiz_complete").innerHTML= 
-    `<h1> ${appState.name}, you have passed the test </h1><br>
+    `<h1> Congratualtions ${appState.name}! You have passed the test </h1><br>
     <h4> Your Score: ${percentage}%</h4><br>
     <h6>Correct: ${appState.correct}</h6><br>
     <h6>Incorrect: ${appState.incorrect}</h6><br>
@@ -270,7 +270,7 @@ function endingscreen()
     else
     {
     document.querySelector("#quiz_complete").innerHTML= 
-    `<h1> ${appState.name}, you have failed the test </h1><br>
+    `<h1> Sorry ${appState.name}, you have failed the test </h1><br>
     <h4> Your Score: ${percentage}%</h4><br>
     <h6>Correct: ${appState.correct}</h6><br>
     <h6>Incorrect: ${appState.incorrect}</h6><br>
@@ -308,18 +308,6 @@ function other()
     getQuiz()
 }
 
-
-//setInterval(setTime, 1000);
-
-// function setTime() {
-//     var minutesLabel = document.getElementById("minutes");
-//     var secondsLabel = document.getElementById("seconds");
-//   ++appState.timePassed;
-//   secondsLabel.innerHTML = pad(appState.timePassed % 60);
-//   minutesLabel.innerHTML = pad(parseInt(appState.timePassed / 60));
-
-//   appState.completedTime=minutesLabel+ ":"+ secondsLabel; 
-// }
 function timer(){
     clearInterval(time);
     let seconds = 0;
@@ -332,14 +320,7 @@ function timer(){
     }, 1000)
 
 }
-// function pad(val) {
-//   var valString = val + "";
-//   if (valString.length < 2) {
-//     return "0" + valString;
-//   } else {
-//     return valString;
-//   }
-// }
+
  function getRandomInt(max){
 
      return Math.floor(Math.random()*Math.floor(max));
