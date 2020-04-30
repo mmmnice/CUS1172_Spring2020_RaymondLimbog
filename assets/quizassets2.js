@@ -1,3 +1,18 @@
+//testing
+var express = require("express")
+var app= express()
+
+const dataset = require('./db');
+const quizdata=dataset.data;
+
+app.get('/quiz1', (req,res) => {
+    res.json(quizdata.quiz1)
+})
+app.get('/quiz2', (req,res) => {
+    res.json(quizdata.quiz2)
+})
+
+
 const appState={
     counter:0,
     correct:0,
@@ -15,10 +30,10 @@ const appState={
     
 }
 let time;
-document.addEventListener('DOMContentLoaded', () =>{
+// document.addEventListener('DOMContentLoaded', () =>{
     
 
-})
+// })
 let getQuiz= async(url) =>{
     
         if(appState.quizno=="quiz1")
@@ -319,4 +334,8 @@ function timer(){
      return Math.floor(Math.random()*Math.floor(max));
 
  }
+
+ app.listen(3000, function(){
+    console.log('example listening to port 3000');
+});
 
