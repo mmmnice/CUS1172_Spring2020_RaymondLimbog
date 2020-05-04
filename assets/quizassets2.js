@@ -3,7 +3,9 @@ var express = require("express")
 var app= express()
 
 const dataset = require('./db');
+const datalist = require('./quizlist');
 const quizdata=dataset.data;
+const quizlist=datalist.quiz_list;
 
 app.get('/quiz1', (req,res) => {
     res.json(quizdata.quiz1)
@@ -11,7 +13,20 @@ app.get('/quiz1', (req,res) => {
 app.get('/quiz2', (req,res) => {
     res.json(quizdata.quiz2)
 })
+app.get('/list', (req,res) => {
+    res.json(quizlist)
+})
 
+app.get('/quiz1/:questionid',(req,res) => {
+    var q_id = req.params['questionid'];
+    returning = quizdata["quiz1"].filter(q => q.id == q_id)
+    res.json(returning)
+})
+app.get('/quiz2/:questionid',(req,res) => {
+    var q_id = req.params['questionid'];
+    returning = quizdata["quiz2"].filter(q => q.id == q_id)
+    res.json(returning)
+})
 
 const appState={
     counter:0,
