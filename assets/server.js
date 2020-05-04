@@ -23,12 +23,32 @@ app.get('/quiz2', (req,res) => {
 app.get('/list', (req,res) => {
     res.json(quizlist)
 })
+app.get('/quiz/:quizid', (req,res) => {
+    var idd= req.params['quizid'];
+    if(idd==1)
+    {
+        res.json(quizdata);
+    }
+    else if(idd==2)
+    {
+        res.json(quizdata2);
+    }
 
-app.get('/quiz1/:questionid',(req,res) => {
-    var q_id = req.params['questionid'];
-    returning = quizdata[q_id]
-    res.json(returning)
 })
+app.get('/quiz/:quizid/:questionid', (req,res) => {
+    var idd= req.params['quizid'];
+    var q_id= req.params['questionid'];
+    if(idd==1)
+    {
+        res.json(quizdata[q_id]);
+    }
+    else if(idd==2)
+    {
+        res.json(quizdata2[q_id]);
+    }
+
+})
+
 app.get('/quiz2/:questionid',(req,res) => {
     var q_id = req.params['questionid'];
     // save filtering maybe for another solution.  GOING TO THE NEXT QUESTOIN   

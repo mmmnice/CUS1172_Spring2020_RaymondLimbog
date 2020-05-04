@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () =>{
 })
 let getQuiz= async(url) =>{
     
-        if(appState.quizno=="quiz1")
+        if(appState.quizno=="1")
         {
-            const response= await fetch("http://localhost:3000/" +appState.quizno)
+            const response= await fetch("http://localhost:3000/quiz/" +appState.quizno)
             const result = await response.json();
             console.log(result);
             appState.currentScore=(appState.correct/appState.quizLength)*100;
