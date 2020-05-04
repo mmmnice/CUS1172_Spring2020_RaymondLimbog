@@ -28,7 +28,7 @@ let getQuiz= async(url) =>{
         {
             const response= await fetch("http://localhost:3000/quiz/" +appState.quizno)
             const result = await response.json();
-            console.log(result);
+            console.log(result.length);
             appState.currentScore=(appState.correct/appState.quizLength)*100;
             appState.quizLength=20;
             console.log(appState.quizLength);
