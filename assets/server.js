@@ -32,6 +32,9 @@ app.get('/quiz2/:questionid',(req,res) => {
 })
 
 app.listen(3000, function(){
-    console.log('example listening to port 3000');
+    console.log('listening to port 3000');
 });
-
+app.use((req,res,next) => {
+    res.header('Access-Control-Allow-Origin' , '*');
+    next();
+});

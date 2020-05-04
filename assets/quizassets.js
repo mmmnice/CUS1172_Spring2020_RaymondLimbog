@@ -23,7 +23,7 @@ let getQuiz= async(url) =>{
     
         if(appState.quizno=="quiz1")
         {
-            const response= await fetch("https://my-json-server.typicode.com/mmmnice/indiv_project_db/" +appState.quizno)
+            const response= await fetch("localhost:3000/" +appState.quizno)
             const result = await response.json();
             console.log(result);
             appState.currentScore=(appState.correct/appState.quizLength)*100;
