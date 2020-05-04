@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/mmmnice/CUS1172_Spring2020_RaymondLimbog/issues"
   },
-  "homepage": "https://github.com/mmmnice/CUS1172_Spring2020_RaymondLimbog#readme"
+  "homepage": "https://github.com/mmmnice/CUS1172_Spring2020_RaymondLimbog#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
