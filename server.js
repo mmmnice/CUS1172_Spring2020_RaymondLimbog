@@ -93,8 +93,8 @@ app.get('/quiz2/:questionid',(req,res) => {
     res.json(returning)
 })
 
-
-app.listen(3000, function(){
+const port = process.env.PORT || 3000
+app.listen(port, function(){
     console.log('listening to port 3000');
 });
 
