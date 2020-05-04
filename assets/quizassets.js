@@ -28,20 +28,20 @@ let getQuiz= async(url) =>{
         {
             const response= await fetch("http://localhost:3000/quiz/" +appState.quizno)
             const result = await response.json();
-            console.log(result.length);
+            console.log(Object.keys(result).length);
             appState.currentScore=(appState.correct/appState.quizLength)*100;
-            appState.quizLength=20;
+            appState.quizLength=Object.keys(result).length;
             console.log(appState.quizLength);
             generateQuiz(result);
 
         }
-        else if(appState.quizno == "quiz2")
+        else if(appState.quizno == "2")
         {
             const response= await fetch("http://localhost:3000/quiz/" +appState.quizno)
             const result = await response.json();
             console.log(result);
             appState.currentScore=(appState.correct/appState.quizLength)*100;
-            appState.quizLength=20;
+            appState.quizLength=Object.keys(result).length;
             console.log(appState.quizLength);
             generateQuiz(result);
  
@@ -265,7 +265,7 @@ function goodFeedback()
     // $('#feedback_view').delay(1000).fadeOut(300);
 
     setTimeout(function() {
-        if (appState.counter<appState.quizLength){
+        if (appState.counter<=appState.quizLength){
             //getQuiz();
             getQuiz();
         }
@@ -280,7 +280,7 @@ function badFeedback()
 {
     document.querySelector("#quiz_view").style.display='none';
     document.querySelector("#feedback_view").style.display='block';
-    if(appState.counter<appState.quizLength){
+    if(appState.counter<=appState.quizLength){
         
     document.querySelector("#feedback_view").innerHTML=`<h1>Incorrect</h1>
      <p> ${appState.result.feedback} </p>
