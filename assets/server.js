@@ -49,6 +49,11 @@ app.get('/quiz/:quizid/:questionid', (req,res) => {
 
 })
 app.get('/check_answer/:quizid/:questionid/:answer', (req,res) => {
+    let response = {
+        correct: null,
+        feedback: '',
+
+    }
     var id=req.params['quizid'];
     var q_id= req.params['questionid'];
     var personanswer= req.params['answer'];
@@ -58,10 +63,12 @@ app.get('/check_answer/:quizid/:questionid/:answer', (req,res) => {
         questionAnswer=quizdata[q_id].answer;
         if(personanswer==questionAnswer)
         {
-            console.log('correct!')
+            response.correct=true;
+            res.json(response)
         }
         else{
-            console.log('wrong!')
+            response.feedback=quizdata[q_id].reason;
+            res.json(response)
         }
 
         
