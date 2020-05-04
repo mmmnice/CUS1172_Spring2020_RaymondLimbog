@@ -48,6 +48,36 @@ app.get('/quiz/:quizid/:questionid', (req,res) => {
     }
 
 })
+app.get('/check_answer/:quizid/:questionid/:answer', (req,res) => {
+    var id=req.params['quizid'];
+    var q_id= req.params['questionid'];
+    var personanswer= req.params['answer'];
+    //res.json(quizdata)
+    if(id==1)
+    {
+        questionAnswer=quizdata[q_id].answer;
+        if(personanswer==questionAnswer)
+        {
+            console.log('correct!')
+        }
+        else{
+            console.log('wrong!')
+        }
+
+        
+    }
+    else if (id==2)
+    {
+        questionAnswer=quizdata[q_id].answer;
+        if(personanswer==questionAnswer)
+        {
+            console.log('correct!')
+        }
+        else{
+            console.log('wrong!')
+        }
+    }
+})
 
 app.get('/quiz2/:questionid',(req,res) => {
     var q_id = req.params['questionid'];
