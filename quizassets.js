@@ -26,7 +26,7 @@ let getQuiz= async(url) =>{
     
         if(appState.quizno=="1")
         {
-            const response= await fetch("http://localhost:3000/quiz/" +appState.quizno)
+            const response= await fetch("https://cus1172finalmilestone.herokuapp.com/quiz/" +appState.quizno)
             const result = await response.json();
             console.log(Object.keys(result).length);
             appState.currentScore=(appState.correct/appState.quizLength)*100;
@@ -37,7 +37,7 @@ let getQuiz= async(url) =>{
         }
         else if(appState.quizno == "2")
         {
-            const response= await fetch("http://localhost:3000/quiz/" +appState.quizno)
+            const response= await fetch("https://cus1172finalmilestone.herokuapp.com/quiz/" +appState.quizno)
             const result = await response.json();
             console.log(result);
             appState.currentScore=(appState.correct/appState.quizLength)*100;
@@ -64,7 +64,7 @@ function getinformation(){
 let getQuestion = async(url) => {
     if(appState.quizno=="1")
     {
-        const response=await fetch("http://localhost:3000/quiz/" + appState.quizno + "/" + appState.counter)
+        const response=await fetch("https://cus1172finalmilestone.herokuapp.com/quiz/" + appState.quizno + "/" + appState.counter)
         const result= await response.json();
         console.log(result.choices[2]);
         //appState.information=result;
@@ -73,7 +73,7 @@ let getQuestion = async(url) => {
     }
     else if(appState.quizno=="2")
     {
-        const response = await fetch("http://localhost:3000/quiz/" + appState.quizno +"/" + appState.counter)
+        const response = await fetch("https://cus1172finalmilestone.herokuapp.com/quiz/" + appState.quizno +"/" + appState.counter)
         const result = await response.json();
         console.log(result);
        // appState.information=result;
@@ -203,7 +203,7 @@ function generateQuiz(data){
 let jsoncheck= async(url) =>{
     if(appState.quizno=="1")
     {
-        const response = await fetch("http://localhost:3000/check_answer/" + appState.quizno + "/" +appState.counter + "/" +appState.selectedAnswer)
+        const response = await fetch("https://cus1172finalmilestone.herokuapp.com/check_answer/" + appState.quizno + "/" +appState.counter + "/" +appState.selectedAnswer)
         const result = await response.json();
         console.log(result);
         appState.result=result;
@@ -240,6 +240,7 @@ function check(userAnswer)
         
     // }
 }
+// does it save?
 function goodFeedback()
 {
     let a= getRandomInt(3);
