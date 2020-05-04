@@ -1,4 +1,4 @@
-const data = {
+var data = {
 
     quiz1:[
         {
@@ -7,7 +7,10 @@ const data = {
             "type" : "multiple choice",
             "choices": ["link" , "style", "script","img"],
             "answer" : "link",
-            "reason": "The link tag is used to refer to a css file"
+            "reason": "The link tag is used to refer to a css file",
+            meta : {
+                next_question: "2"
+            }
         },
         {
             "id": 2,
@@ -15,7 +18,10 @@ const data = {
             "type" : "short answer",
             "choices": [],
             "answer" : ".demo",
-            "reason" : ".demo for classes, #demo for ids"
+            "reason" : ".demo for classes, #demo for ids",
+            meta : {
+                next_question: "3"
+            }
         },
         {
             "id": 3,
@@ -23,7 +29,10 @@ const data = {
             "type" : "true false",
             "choices": ["true", "false"],
             "answer" : "true",
-            "reason" : "It's true. h2{background-color:red;} is an example"
+            "reason" : "It's true. h2{background-color:red;} is an example",
+            meta : {
+                next_question: "4"
+            }
 
         },
         {
@@ -32,7 +41,10 @@ const data = {
             "type" : "fill in the blank",
             "choices" :[],
             "answer" : "<h1>",
-            "reason" : "It's h1"
+            "reason" : "It's h1",
+            meta : {
+                next_question: "5"
+            }
         },
         {
             "id": 5,
@@ -40,7 +52,10 @@ const data = {
             "type" : "image",
             "choices": ["https://qph.fs.quoracdn.net/main-qimg-28cadbd02699c25a88e5c78d73c7babc","https://sdtimes.com/wp-content/uploads/2019/03/jW4dnFtA_400x400.jpg","https://cdn.worldvectorlogo.com/logos/c-2975.svg"],
             "answer" : "https://qph.fs.quoracdn.net/main-qimg-28cadbd02699c25a88e5c78d73c7babc",
-            "reason" : "It's the first one"
+            "reason" : "It's the first one",
+            meta : {
+                next_question: "6"
+            }
         },
         {
             "id": 6,
@@ -48,7 +63,10 @@ const data = {
             "type" : "multiple choice",
             "choices" : ["Serves as a minimal template engine for front end applications", "Implements the model view pattern routing in single page applications", "Provides functionality for accessing databases remotely", "Provides functionality issuing asynchronous network request from within the browser"],
             "answer" : "Serves as a minimal template engine for front end applications",
-            "reason" : "Handlebars is templates for the front end"
+            "reason" : "Handlebars is templates for the front end",
+            meta : {
+                next_question: "7"
+            }
         },
         {
             "id": 7,
@@ -56,7 +74,10 @@ const data = {
             "type" : "multiple choice",
             "choices" : ["Colorful Style Sheets", "Computer Style Sheets", "Creative Style Sheets", "Cascading Style Sheets"],
             "answer" : "Cascading Style Sheets",
-            "reason" : "CSS is short for cascading style sheets"
+            "reason" : "CSS is short for cascading style sheets",
+            meta : {
+                next_question: "8"
+            }
         },
         {
             "id": 8,
@@ -64,7 +85,10 @@ const data = {
             "type" : "multiple choice",
             "choices" : ["var colors = 'red' , 'green', 'blue'", "var colors = ['red', 'green', 'blue']", "var colors = (1:'red' , 2:'green', 3:'blue')", "var colors[] = new Array()"],
             "answer" : "var colors = ['red', 'green', 'blue']",
-            "reason" : "It's the second one"
+            "reason" : "It's the second one",
+            meta : {
+                next_question: "9"
+            }
         },
         {
             "id": 9,
@@ -72,7 +96,10 @@ const data = {
             "type" : "true false",
             "choices": ["true", "false"],
             "answer" : "true",
-            "reason" : "It's true"
+            "reason" : "It's true",
+            meta : {
+                next_question: "10"
+            }
         },
         {
             "id": 10,
@@ -80,7 +107,10 @@ const data = {
             "type" : "short answer",
             "choices": [],
             "answer" : "onsubmit",
-            "reason" : "onsubmit is the correct answer"
+            "reason" : "onsubmit is the correct answer",
+            meta : {
+                next_question: "11"
+            }
         },
         {
             "id": 11,
@@ -88,7 +118,10 @@ const data = {
             "type" : "image",
             "choices": ["https://qph.fs.quoracdn.net/main-qimg-28cadbd02699c25a88e5c78d73c7babc","https://sdtimes.com/wp-content/uploads/2019/03/jW4dnFtA_400x400.jpg","https://cdn.worldvectorlogo.com/logos/c-2975.svg"],
             "answer" : "https://sdtimes.com/wp-content/uploads/2019/03/jW4dnFtA_400x400.jpg",
-            "reason" : "It's the second one"
+            "reason" : "It's the second one",
+            meta : {
+                next_question: "12"
+            }
         },
         {
             "id": 12,
@@ -96,7 +129,10 @@ const data = {
             "type" : "image",
             "choices": ["https://ih0.redbubble.net/image.174928237.6370/flat,750x,075,f-pad,750x1000,f8f8f8.jpg","https://sdtimes.com/wp-content/uploads/2019/03/jW4dnFtA_400x400.jpg","https://johnson0helpdesk.files.wordpress.com/2014/10/ruby-53272f15396c2222cc0f9899fd13fb9f.png"],
             "answer" : "https://ih0.redbubble.net/image.174928237.6370/flat,750x,075,f-pad,750x1000,f8f8f8.jpg",
-            "reason" : "It's the first one"
+            "reason" : "It's the first one",
+            meta : {
+                next_question: "13"
+            }
         },
         {
             "id": 13,
@@ -104,7 +140,10 @@ const data = {
             "type" : "fill in the blank",
             "choices": [],
             "answer" : "//",
-            "reason" : "// is the correct answer"
+            "reason" : "// is the correct answer",
+            meta : {
+                next_question: "14"
+            }
         },
         {
             "id": 14,
@@ -112,7 +151,10 @@ const data = {
             "type" : "true false",
             "choices": ["true", "false"],
             "answer" : "false",
-            "reason" : "Class selectors use a ."
+            "reason" : "Class selectors use a .",
+            meta : {
+                next_question: "15"
+            }
         },
         {
             "id": 15,
@@ -120,7 +162,10 @@ const data = {
             "type" : "true false",
             "choices": ["true", "false"],
             "answer" : "false",
-            "reason" : "const can be used to declare a variable.  Just like let and var."
+            "reason" : "const can be used to declare a variable.  Just like let and var.",
+            meta : {
+                next_question: "16"
+            }
         },
         {
             "id": 16,
@@ -128,7 +173,10 @@ const data = {
             "type" : "true false",
             "choices": ["true", "false"],
             "answer" : "true",
-            "reason" : "This was true"
+            "reason" : "This was true",
+            meta : {
+                next_question: "17"
+            }
         },
         {
             "id": 17,
@@ -136,7 +184,10 @@ const data = {
             "type" : "short answer",
             "choices": [],
             "answer" : "style",
-            "reason" : "style is the correct answer"
+            "reason" : "style is the correct answer",
+            meta : {
+                next_question: "18"
+            }
         },
         {
             "id": 18,
@@ -144,7 +195,10 @@ const data = {
             "type" : "multiple choice",
             "choices": ["myFunction.invoke()" , "myFunction", "function.call(myFunction)","myFunction()"],
             "answer" : "myFunction()",
-            "reason": "The answer is myFunction()"
+            "reason": "The answer is myFunction()",
+            meta : {
+                next_question: "19"
+            }
         },
         {
             "id": 19,
@@ -152,7 +206,10 @@ const data = {
             "type" : "fill in the blank",
             "choices": [],
             "answer" : "ol",
-            "reason" : "ol is the correct answer"
+            "reason" : "ol is the correct answer",
+            meta : {
+                next_question: "20"
+            }
         },
         {
             "id": 20,
@@ -160,7 +217,7 @@ const data = {
             "type" : "fill in the blank",
             "choices": [],
             "answer" : "br",
-            "reason" : "it's br"
+            "reason" : "it's br",
         }
     ],
     quiz2:[
@@ -170,7 +227,10 @@ const data = {
             "type" : "multiple choice",
             "choices": ["It increments the variable i in itself" , "It subtracts 1 from the variable i", "It adds 1 to the variable i","It does nothing"],
             "answer" : "It adds 1 to the variable i",
-            "reason": "It's the third one."
+            "reason": "It's the third one.",
+            meta : {
+                next_question: "2"
+            }
         },
         {
             "id":2,
@@ -178,7 +238,10 @@ const data = {
             "type" : "multiple choice",
             "choices": ["Its input variables are specified in alphabetical order", "At least one of their input variables is a function", "It is defined using the arrow notation", "It is a function that does not manipulate its internal state."],
             "answer" : "At least one of their input variables is a function",
-            "reason" : "It's the second one"
+            "reason" : "It's the second one",
+            meta : {
+                next_question: "3"
+            }
         },
         {
             "id":3,
@@ -186,7 +249,10 @@ const data = {
             "type" : "fill in the blank",
             "choices": [],
             "answer" : "import",
-            "reason" : "you can use import"
+            "reason" : "you can use import",
+            meta : {
+                next_question: "4"
+            }
 
         },
         {
@@ -195,7 +261,10 @@ const data = {
             "type" : "true false",
             "choices": ["true", "false"],
             "answer" : "true",
-            "reason" : "This was true"
+            "reason" : "This was true",
+            meta : {
+                next_question: "5"
+            }
         },
         {
             "id":5,
@@ -203,7 +272,10 @@ const data = {
             "type" : "short answer",
             "choices": [],
             "answer" : "for",
-            "reason" : "You use for for a for loop"
+            "reason" : "You use for for a for loop",
+            meta : {
+                next_question: "6"
+            }
         },
         {
             "id":6,
@@ -211,7 +283,10 @@ const data = {
             "type" : "short answer",
             "choices": [],
             "answer" : "while",
-            "reason" : "You use while for a while loop"
+            "reason" : "You use while for a while loop",
+            meta : {
+                next_question: "7"
+            }
         },
         {
             "id":7,
@@ -219,7 +294,10 @@ const data = {
             "type" : "multiple choice",
             "choices": ["function","programming language", "form","style"],
             "answer" : "programming language",
-            "reason" : "Python is a programming language.  It's the second one"
+            "reason" : "Python is a programming language.  It's the second one",
+            meta : {
+                next_question: "8"
+            }
         },
         {
             "id":8,
@@ -227,7 +305,10 @@ const data = {
             "type" : "image",
             "choices": ["https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png","https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/1024px-Ruby_logo.svg.png","https://i7.pngguru.com/preview/46/626/460/the-c-programming-language-computer-icons-computer-programming-source-code-programming.jpg"],
             "answer" : "https://i7.pngguru.com/preview/46/626/460/the-c-programming-language-computer-icons-computer-programming-source-code-programming.jpg",
-            "reason" : "It's the third one"
+            "reason" : "It's the third one",
+            meta : {
+                next_question: "9"
+            }
         },
         {
             "id":9,
@@ -235,7 +316,10 @@ const data = {
             "type" : "multiple choice",
             "choices": ["div","query", "markup language","id"],
             "answer" : "markup language",
-            "reason" : "You use for for a for loop"
+            "reason" : "You use for for a for loop",
+            meta : {
+                next_question: "10"
+            }
         },
         {
             "id":10,
@@ -243,7 +327,10 @@ const data = {
             "type" : "image",
             "choices": ["https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png","https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/C_Sharp_logo.svg/1200px-C_Sharp_logo.svg.png","https://www.stickpng.com/assets/images/58480979cef1014c0b5e4901.png"],
             "answer" : "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/C_Sharp_logo.svg/1200px-C_Sharp_logo.svg.png",
-            "reason" : "It's the second one"
+            "reason" : "It's the second one",
+            meta : {
+                next_question: "11"
+            }
         },
         {
             "id":11,
@@ -251,7 +338,10 @@ const data = {
             "type" : "image",
             "choices" :["https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png","https://img.favpng.com/16/10/16/python-javascript-logo-clojure-png-favpng-3x1GWHfajrTRuNP9cpdDLjbcc.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png"],
             "answer" : "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
-            "reason" : "It's the first one"
+            "reason" : "It's the first one",
+            meta : {
+                next_question: "12"
+            }
         },
         {
             "id":12,
@@ -259,7 +349,10 @@ const data = {
             "type" : "fill in the blank",
             "choices" : [],
             "answer" : "module",
-            "reason" : "The answer is 'module'"
+            "reason" : "The answer is 'module'",
+            meta : {
+                next_question: "13"
+            }
         },
         {
             "id":13,
@@ -267,7 +360,10 @@ const data = {
             "type" : "true false",
             "choices" : ["true", "false"],
             "answer" : "true",
-            "reason" : "The answer is true"
+            "reason" : "The answer is true",
+            meta : {
+                next_question: "14"
+            }
         },
         {
             "id":14,
@@ -275,7 +371,10 @@ const data = {
             "type" : "true false",
             "choices" : ["true", "false"],
             "answer" : "true",
-            "reason" : "The answer is true"
+            "reason" : "The answer is true",
+            meta : {
+                next_question: "15"
+            }
         },
         {
             "id":15,
@@ -283,7 +382,10 @@ const data = {
             "type" : "fill in the blank",
             "choices" : [],
             "answer" : "string",
-            "reason" : "The answer is 'string'"
+            "reason" : "The answer is 'string'",
+            meta : {
+                next_question: "16"
+            }
         },
         {
             "id":16,
@@ -291,7 +393,10 @@ const data = {
             "type" : "multiple choice",
             "choices" : ["lambda","list","string","import"],
             "answer" : "lambda",
-            "reason" : "The answer is 'lambda'"
+            "reason" : "The answer is 'lambda'",
+            meta : {
+                next_question: "17"
+            }
         },
         {
             "id":17,
@@ -299,7 +404,10 @@ const data = {
             "type" : "true false",
             "choices" : [],
             "answer" : "false",
-            "reason" : "There is such thing as inheritance in python.  Class properties can be inherited from other classes"
+            "reason" : "There is such thing as inheritance in python.  Class properties can be inherited from other classes",
+            meta : {
+                next_question: "18"
+            }
         },
         {
             "id":18,
@@ -307,7 +415,10 @@ const data = {
             "type" : "true false",
             "choices" : ["true", "false"],
             "answer" : "true",
-            "reason" : "The answer is true"
+            "reason" : "The answer is true",
+            meta : {
+                next_question: "19"
+            }
         },
         {
             "id":19,
@@ -315,15 +426,18 @@ const data = {
             "type" : "true false",
             "choices" : ["true", "false"],
             "answer" : "false",
-            "reason" : "The answer is false"
+            "reason" : "The answer is false",
+            meta : {
+                next_question: "20"
+            }
         },
         {
-            "id":2,
+            "id":20,
             "question": "What is another term for an array in python",
             "type" : "short answer",
             "choices" : [],
             "answer" : "list",
-            "reason" : "The answer is list"
+            "reason" : "The answer is list",
         }
         
         
