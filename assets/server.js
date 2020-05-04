@@ -1,7 +1,12 @@
 //testing
+
+
 var express = require("express")
 var app= express()
-
+app.use((req,res,next) => {
+    res.header('Access-Control-Allow-Origin' , '*');
+    next();
+});
 const dataset = require('./db');
 const datalist = require('./quizlist');
 const dataset2=require('./db2');
@@ -31,10 +36,10 @@ app.get('/quiz2/:questionid',(req,res) => {
     res.json(returning)
 })
 
+
 app.listen(3000, function(){
     console.log('listening to port 3000');
 });
-app.use((req,res,next) => {
-    res.header('Access-Control-Allow-Origin' , '*');
-    next();
-});
+
+
+
