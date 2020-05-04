@@ -1,5 +1,5 @@
 const appState={
-    counter:0,
+    counter:1,
     correct:0,
     incorrect:0,
     name:'',
@@ -11,7 +11,10 @@ const appState={
     timePassed:0,
     currentScore:0,
     clock:"",
-    completedTime:""
+    completedTime:"",
+    information:'',
+    question:"",
+    result:""
     
 }
 let time;
@@ -27,29 +30,22 @@ let getQuiz= async(url) =>{
             const result = await response.json();
             console.log(result);
             appState.currentScore=(appState.correct/appState.quizLength)*100;
-            appState.quizLength=result.length;
+            appState.quizLength=20;
             console.log(appState.quizLength);
             generateQuiz(result);
-            // if(appState.counter==0)
-            // {
-            //     setInterval(setTime, 1000);
-            // }
+
         }
         else if(appState.quizno == "quiz2")
         {
-            const response= await fetch("https://my-json-server.typicode.com/mmmnice/indiv_project_db2/" +appState.quizno)
+            const response= await fetch("http://localhost:3000/quiz/" +appState.quizno)
             const result = await response.json();
             console.log(result);
             appState.currentScore=(appState.correct/appState.quizLength)*100;
-            appState.quizLength=result.length;
+            appState.quizLength=20;
             console.log(appState.quizLength);
             generateQuiz(result);
-            // if(appState.counter==0)
-            // {
-            //     setInterval(setTime, 1000);
-            // }
+ 
         }
-        //const response= await fetch("https://my-json-server.typicode.com/mmmnice/indiv_project_db/" +appState.quizno)
         
 }
 
@@ -65,8 +61,31 @@ function getinformation(){
    // generateQuiz(thequiz);
 
 }
+let getQuestion = async(url) => {
+    if(appState.quizno=="1")
+    {
+        const response=await fetch("http://localhost:3000/quiz/" + appState.quizno + "/" + appState.counter)
+        const result= await response.json();
+        console.log(result.choices[2]);
+        //appState.information=result;
+       // console.log(appState.information);
+        generateQuestion(result);
+    }
+    else if(appState.quizno=="2")
+    {
+        const response = await fetch("http://localhost:3000/quiz/" + appState.quizno +"/" + appState.counter)
+        const result = await response.json();
+        console.log(result);
+       // appState.information=result;
+        //console.log(appState.information);
+        generateQuestion(result);
+    }
+}
 function generateQuestion(data){
-    console.log(data.answer)
+
+    //var data=getQuestion()
+   // var hey=getQuestion()
+   // console.log(data.answer)
     let what = appState.currentScore.toFixed(2);
     //console.log(appState.correctAnswerForCurrentQuestion)
     console.log(data)
@@ -145,21 +164,26 @@ function generateQuestion(data){
         //document.getElementById().innerHTML= ""
     
         console.log(quiz_question)
-    return quiz_question
+     appState.question=quiz_question
 }
 
 function generateQuiz(data){
     console.log(appState.timePassed)
+   getQuestion()
+   console.log(appState.question)
+    //usethis=getQuestion()
+    //console.log(usethis)
+    //generateQuestion
     quiz_question=generateQuestion(data[appState.counter]);
-    appState.correctAnswerForCurrentQuestion=data[appState.counter].answer;
-    appState.feedback=data[appState.counter].reason;
-    console.log(appState.feedback);
+   // appState.correctAnswerForCurrentQuestion=data[appState.counter].answer;
+    //appState.feedback=data[appState.counter].reason;
+    //console.log(appState.feedback);
     //console.log(appState.correctAnswerForCurrentQuestion);
     document.querySelector("#start").style.display = 'none';
     document.querySelector("#feedback_view").style.display= 'none';
-    document.querySelector("#quiz_view").innerHTML= generateQuestion(data[appState.counter]);
+    document.querySelector("#quiz_view").innerHTML= appState.question;//generateQuestion(data[appState.counter]);
     document.querySelector("#quiz_view").style.display= 'block';
-    if(appState.counter==0)
+    if(appState.counter==1)
     {    
         document.querySelector("#timer").style.display='block';
         timer();
@@ -168,31 +192,53 @@ function generateQuiz(data){
     document.querySelector("#quiz_view").onsubmit =  () =>{
         appState.selectedAnswer=document.forms["quiz_answer_form"]["answer"].value;
         console.log(appState.selectedAnswer)
-        check(appState.correctAnswerForCurrentQuestion, appState.selectedAnswer)
+        jsoncheck();
+        //check(appState.selectedAnswer)
         //feedback(response,data[i].reason)
        // document.querySelector("#quiz_view").style.display = 'none';
         //document.querySelector("#feedback_view").innerHTML= feedback_text;
         return false;
     }
 }
+let jsoncheck= async(url) =>{
+    if(appState.quizno=="1")
+    {
+        const response = await fetch("http://localhost:3000/check_answer/" + appState.quizno + "/" +appState.counter + "/" +appState.selectedAnswer)
+        const result = await response.json();
+        console.log(result);
+        appState.result=result;
+        console.log(appState.result);
+        check(appState.selectedAnswer)
+    }
+}
 
-function check(rightAnswer,userAnswer)
+function check(userAnswer)
 {
     document.querySelector("#quiz_view").style.display='none';
     document.querySelector("#feedback_view").style.display='none';
-    console.log(rightAnswer);
-    console.log(userAnswer);
-    if(rightAnswer== userAnswer){
-        appState.correct=appState.correct+1;
-        appState.counter=appState.counter+1;
+    // console.log(rightAnswer);
+    console.log(appState.result.correct);
+    if(appState.result.correct != null){
+        appState.correct = appState.correct+1;
+        appState.counter= appState.counter+1;
         goodFeedback()
     }
     else{
         appState.incorrect=appState.incorrect+1;
         appState.counter=appState.counter+1;
         badFeedback()
-        
     }
+    // if(rightAnswer== userAnswer){
+    //     appState.correct=appState.correct+1;
+    //     appState.counter=appState.counter+1;
+    //     goodFeedback()
+    // }
+    // else{
+    //     appState.incorrect=appState.incorrect+1;
+    //     appState.counter=appState.counter+1;
+    //     badFeedback()
+        
+    // }
 }
 function goodFeedback()
 {
@@ -220,6 +266,7 @@ function goodFeedback()
 
     setTimeout(function() {
         if (appState.counter<appState.quizLength){
+            //getQuiz();
             getQuiz();
         }
         else {
@@ -236,12 +283,12 @@ function badFeedback()
     if(appState.counter<appState.quizLength){
         
     document.querySelector("#feedback_view").innerHTML=`<h1>Incorrect</h1>
-     <p> ${appState.feedback} </p>
+     <p> ${appState.result.feedback} </p>
      <input type ="button" onclick=getQuiz() value = "Got It"> `
     }
     else{
         document.querySelector("#feedback_view").innerHTML=`<h1>Incorrect</h1>
-        <p> ${appState.feedback} </p>
+        <p> ${appState.result.feedback} </p>
         <input type="button" onclick=endingscreen() value = "Got It">`
     }
 }
@@ -282,7 +329,7 @@ function endingscreen()
 // take off displays
 function retake()
 {
-    appState.counter=0;
+    appState.counter=1;
     appState.correct=0;
     appState.incorrect=0;
     appState.currentScore=0;
@@ -292,7 +339,7 @@ function retake()
 function other()
 {
     //appState.quizno="quiz2";
-    appState.counter=0;
+    appState.counter=1;
     appState.correct=0;
     appState.incorrect=0;
     appState.currentScore=0;
