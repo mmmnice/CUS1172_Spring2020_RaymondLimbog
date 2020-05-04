@@ -4,14 +4,16 @@ var app= express()
 
 const dataset = require('./db');
 const datalist = require('./quizlist');
+const dataset2=require('./db2');
+const quizdata2=dataset2.data;
 const quizdata=dataset.data;
 const quizlist=datalist.quiz_list;
 
 app.get('/quiz1', (req,res) => {
-    res.json(quizdata.quiz1)
+    res.json(quizdata)
 })
 app.get('/quiz2', (req,res) => {
-    res.json(quizdata.quiz2)
+    res.json(quizdata2)
 })
 app.get('/list', (req,res) => {
     res.json(quizlist)
@@ -19,11 +21,12 @@ app.get('/list', (req,res) => {
 
 app.get('/quiz1/:questionid',(req,res) => {
     var q_id = req.params['questionid'];
-    returning = quizdata["quiz1"].filter(q => q.id == q_id)
+    returning = quizdata[1]
     res.json(returning)
 })
 app.get('/quiz2/:questionid',(req,res) => {
     var q_id = req.params['questionid'];
+    // save filtering maybe for another solution
     returning = quizdata["quiz2"].filter(q => q.id == q_id)
     res.json(returning)
 })

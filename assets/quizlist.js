@@ -11,4 +11,4 @@ var quiz_list={
     }
 };
 
-module.exports = quiz_list;
+module.exports.quiz_list = quiz_list;
