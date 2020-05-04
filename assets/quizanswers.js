@@ -208,3 +208,4 @@ const quiz_answers = {
         
     ]
 }
+module.exports = quiz_list;
