@@ -9,5 +9,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmmnice/CUS1172_Spring2020_RaymondLimbog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mmmnice/CUS1172_Spring2020_RaymondLimbog/issues"
+  },
+  "homepage": "https://github.com/mmmnice/CUS1172_Spring2020_RaymondLimbog#readme"
 }
