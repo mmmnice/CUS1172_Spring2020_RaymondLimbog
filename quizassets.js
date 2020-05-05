@@ -214,6 +214,7 @@ let jsoncheck= async(url) =>{
     {
         const response = await fetch("https://cus1172finalmilestone.herokuapp.com/check_answer/" + appState.quizno + "/" +appState.counter + "/" +appState.selectedAnswer)
         const result = await response.json();
+        console.log(appState.selectedAnswer)
         console.log(result);
         appState.result=result;
         console.log(appState.result);

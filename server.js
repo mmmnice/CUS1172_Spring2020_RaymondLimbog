@@ -75,14 +75,14 @@ app.get('/check_answer/:quizid/:questionid/:answer', (req,res) => {
     }
     else if (id==2)
     {
-        questionAnswer=quizdata[q_id].answer;
+        questionAnswer=quizdata2[q_id].answer;
         if(personanswer==questionAnswer)
         {
             response.correct=true;
             res.json(response)
         }
         else{
-            response.feedback=quizdata[q_id].reason;
+            response.feedback=quizdata2[q_id].reason;
             res.json(response)
         }
     }
