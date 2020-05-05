@@ -78,10 +78,12 @@ app.get('/check_answer/:quizid/:questionid/:answer', (req,res) => {
         questionAnswer=quizdata[q_id].answer;
         if(personanswer==questionAnswer)
         {
-            console.log('correct!')
+            response.correct=true;
+            res.json(response)
         }
         else{
-            console.log('wrong!')
+            response.feedback=quizdata[q_id].reason;
+            res.json(response)
         }
     }
 })
