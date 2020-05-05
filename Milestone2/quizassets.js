@@ -210,6 +210,15 @@ let jsoncheck= async(url) =>{
         console.log(appState.result);
         check(appState.selectedAnswer)
     }
+    if(appState.quizno=="2")
+    {
+        const response = await fetch("https://cus1172finalmilestone.herokuapp.com/check_answer/" + appState.quizno + "/" +appState.counter + "/" +appState.selectedAnswer)
+        const result = await response.json();
+        console.log(result);
+        appState.result=result;
+        console.log(appState.result);
+        check(appState.selectedAnswer)
+    }
 }
 
 function check(userAnswer)
